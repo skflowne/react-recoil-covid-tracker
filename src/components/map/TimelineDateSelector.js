@@ -1,5 +1,5 @@
 import React from "react"
-import { addDays, subDays } from "date-fns"
+import { addDays, subDays, formatDistanceToNow } from "date-fns"
 import { useRecoilState } from "recoil"
 import { viewDate } from "../../state/status"
 
@@ -16,7 +16,8 @@ const TimelineDateSelector = (props) => {
     }
 
     return (
-        <div className="absolute flex flex-row items-center">
+        <div className="absolute flex flex-row items-center bg-gray-100">
+            <span className="px-4">{formatDistanceToNow(date, { addSuffix: true })}</span>
             <div className="p-2 border" onClick={handleBackward}>
                 &lt; Backward
             </div>
