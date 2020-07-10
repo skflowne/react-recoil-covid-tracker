@@ -6,11 +6,18 @@ export const viewDate = atom({
     default: new Date(),
 })
 
+export const formattedViewDate = selector({
+    key: "formatted-view-date",
+    get: ({ get }) => {
+        const date = get(viewDate)
+        return format(date, "yyyy-MM-dd")
+    },
+})
+
 export const statusByDateList = selector({
     key: "status-by-date",
     get: async ({ get }) => {
-        const date = get(viewDate)
-        const formattedDate = format(date, "yyyy-MM-dd")
+        const formattedDate = get(formattedViewDate)
 
         console.log("get status by date", formattedDate)
 

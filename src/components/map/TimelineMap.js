@@ -1,6 +1,6 @@
 import React from "react"
 import DeckGL from "@deck.gl/react"
-import { ScatterplotLayer } from "@deck.gl/layers"
+import { ScatterplotLayer, TextLayer } from "@deck.gl/layers"
 import { StaticMap } from "react-map-gl"
 
 import { useRecoilValueLoadable } from "recoil"
@@ -50,12 +50,23 @@ const TimelineMap = (props) => {
         filled: true,
         getPosition: (d) => d.coordinates,
         getRadius: (d) => (d.cases > 0 ? 50000 + d.cases * 0.3 : 0),
-        getFillColor: [255, 0, 0],
+        getFillColor: [255, 127, 127],
+    })
+
+    const casesLayer = new TextLayer({
+        id: "cases-layer",
+        data,
+        pickable: true,
+        billbpard: true,
+        getPosition: (d) => d.coordinates,
+        getText: (d) => (d.cases > 0 ? d.cases.toString() : ""),
+        getSize: (d) => (d.cases > 0 ? 20 : 0),
+        getColor: (d) => [d.cases / 255, 255 - d.cases / 255, 0],
     })
 
     return (
         <div className="w-full">
-            <DeckGL initialViewState={INITIAL_VIEW_STATE} controller={true} layers={[timelineLayer]}>
+            <DeckGL initialViewState={INITIAL_VIEW_STATE} controller={true} layers={[timelineLayer, casesLayer]}>
                 <StaticMap mapboxApiAccessToken={MAPBOX_ACCESS_TOKEN} />
             </DeckGL>
             <TimelineSlider timelineStart={startDate} timelineEnd={endDate} />
