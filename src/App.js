@@ -7,10 +7,8 @@ import TimelineDateSelector from "./components/map/TimelineDateSelector"
 function App() {
     return (
         <RecoilRoot>
-            <Suspense fallback={<div>Loading...</div>}>
-                <TimelineMap />
-                <TimelineDateSelector />
-            </Suspense>
+            <TimelineMap />
+            <TimelineDateSelector />
         </RecoilRoot>
     )
 }

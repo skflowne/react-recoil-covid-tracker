@@ -16,13 +16,17 @@ const TimelineDateSelector = (props) => {
     }
 
     return (
-        <div className="absolute flex flex-row items-center bg-gray-100">
-            <span className="px-4">{formatDistanceToNow(date, { addSuffix: true })}</span>
-            <div className="p-2 border" onClick={handleBackward}>
-                &lt; Backward
-            </div>
-            <div className="p-2 border" onClick={handleForward}>
-                Forward &gt;
+        <div className="absolute flex flex-col bg-gray-100">
+            <span className="px-4 flex items-center justify-center">
+                {formatDistanceToNow(date, { addSuffix: true })}
+            </span>
+            <div className="flex flex-row items-center">
+                <div className="p-2 border" onClick={handleBackward}>
+                    &lt; Backward
+                </div>
+                <div className="p-2 border" onClick={handleForward}>
+                    Forward &gt;
+                </div>
             </div>
         </div>
     )
