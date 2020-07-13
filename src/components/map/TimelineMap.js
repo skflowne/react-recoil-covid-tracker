@@ -49,8 +49,14 @@ const TimelineMap = (props) => {
         stroked: false,
         filled: true,
         getPosition: (d) => d.coordinates,
-        getRadius: (d) => (d.cases > 0 ? 50000 + d.cases * 0.3 : 0),
-        getFillColor: [200, 200, 200],
+        getRadius: (d) => (d.cases > 0 ? 70000 + d.cases * 0.7 : 0),
+        getFillColor: (d) => [
+            (d.cases * 255) / 500000,
+            255 - (d.cases * 255) / 2000000,
+            0,
+            255 - (d.cases * 255) / 5000000,
+        ],
+        //getFillColor: (d) => [255, 255, 0, 255 - (d.cases * 255) / 5000000],
     })
 
     const casesLayer = new TextLayer({
@@ -61,12 +67,12 @@ const TimelineMap = (props) => {
         getPosition: (d) => d.coordinates,
         getText: (d) => (d.cases > 0 ? d.cases.toString() : ""),
         getSize: (d) => (d.cases > 0 ? 20 : 0),
-        getColor: (d) => [d.cases / 255, 255 - d.cases / 255, 0],
+        getColor: (d) => [(d.cases * 255) / 5000000, 255 - (d.cases * 255) / 5000000, 0],
     })
 
     return (
         <div className="w-full">
-            <DeckGL initialViewState={INITIAL_VIEW_STATE} controller={true} layers={[timelineLayer, casesLayer]}>
+            <DeckGL initialViewState={INITIAL_VIEW_STATE} controller={true} layers={[timelineLayer /*casesLayer*/]}>
                 <StaticMap mapboxApiAccessToken={MAPBOX_ACCESS_TOKEN} />
             </DeckGL>
             <TimelineSlider timelineStart={startDate} timelineEnd={endDate} />
