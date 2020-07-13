@@ -27,7 +27,7 @@ const TimelineMap = (props) => {
     const countries = useRecoilValueLoadable(countryList)
     const status = useRecoilValueLoadable(statusByDateList)
 
-    const startDate = new Date("01 Jan 2020")
+    const startDate = new Date("20 Jan 2020")
     const endDate = new Date()
 
     let data = []
@@ -50,7 +50,7 @@ const TimelineMap = (props) => {
         filled: true,
         getPosition: (d) => d.coordinates,
         getRadius: (d) => (d.cases > 0 ? 50000 + d.cases * 0.3 : 0),
-        getFillColor: [255, 127, 127],
+        getFillColor: [200, 200, 200],
     })
 
     const casesLayer = new TextLayer({

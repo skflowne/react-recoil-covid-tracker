@@ -1,6 +1,6 @@
-import React, { useRef } from "react"
+import React, { useRef, useState } from "react"
 import styled from "@emotion/styled"
-import { addDays, differenceInCalendarDays, format, parse } from "date-fns"
+import { addDays, differenceInCalendarDays, format, parse, subDays } from "date-fns"
 import { useRecoilState } from "recoil"
 import { viewDate } from "../../state/status"
 
